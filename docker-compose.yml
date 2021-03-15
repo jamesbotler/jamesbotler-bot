@@ -2,12 +2,13 @@ version: '3.8'
 
 services:
   production:
-    image: ghcr.io/ralphschuler/jamesbotler:1.2.4
+    image: ghcr.io/ralphschuler/jamesbotler:1.2.5
     restart: always
     env_file:
       - .prod.env
     volumes:
       - ./cache:/usr/src/app/cache
+      - ./data:/usr/src/app/data
     links:
       - tor0
       - tor1

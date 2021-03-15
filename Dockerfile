@@ -6,6 +6,7 @@ RUN apk update && \
 
 FROM base
 WORKDIR /usr/src/app
+RUN mkdir /usr/src/app/data
 RUN mkdir /usr/src/app/cache
 
 COPY package*.json /usr/src/app/

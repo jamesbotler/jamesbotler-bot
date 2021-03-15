@@ -5,17 +5,28 @@ import fs from "fs";
 import path from "path";
 
 export default async function run(str, lang) {
-  const hash = sha256(str);
-  const dbPath = path.join("./", "cache", 'translations', `${hash}.db`);
-  const db = fs.existsSync(dbPath) ? JSON.parse(fs.readFileSync(dbPath)) : {};
-  if (!db.source) db.source = str;
+  const lines = str.split('.\n')
+  let translation = ''
 
-  if (!db || !db[lang]) {
-    db[lang] = await translate(str, lang);
-    fs.writeFile(dbPath, JSON.stringify(db), (error) => {});
+  for (const line of lines) {
+    const hash = sha256(line);
+    const dbPath = path.join("./", "data", 'translations', `${hash}.db`);
+    const db = fs.existsSync(dbPath) ? JSON.parse(fs.readFileSync(dbPath)) : {};
+    if (!db.source) db.source = line;
+
+    if (!db || !db[lang]) {
+      db[lang] = await translate(line, lang);
+      fs.writeFileSync(dbPath, JSON.stringify(db));
+    }
+
+    if (db[lang].endWith('.')) {
+      translation += `${db[lang]}\n`
+    } else {
+      translation += `${db[lang]}.\n`
+    }
   }
 
-  return db[lang];
+  return translation;
 }
 
 async function translate(str, lang) {
@@ -28,6 +39,10 @@ async function translate(str, lang) {
       target: lang,
     },
   });
+
+  if (!response || !response.status === 200 || !response.data || !response.data.translation) {
+    console.log(response)
+  }
 
   return response.data.translation;
 }

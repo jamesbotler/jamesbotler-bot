@@ -10,6 +10,7 @@ export default {
   witai_token_de: process.env.WITAI_TOKEN_DE,
   witai_token_zh: process.env.WITAI_TOKEN_ZH,
   use_proxy: true,
+  eve_market_api: "https://api.eve-echoes-market.com",
   proxies: [
     "socks5h://tor0:9050",
     "socks5h://tor1:9050",
