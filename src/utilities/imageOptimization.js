@@ -6,8 +6,7 @@ export default function run(buffer) {
       gm(buffer)
         .antialias(false)
         .negative()
-        .contrast(-25)
-        .threshold(55, true)
+        .threshold(80, true)
         .size(function (error, size) {
           if (error) reject(error);
           const factor = Math.min(1, 1920.0 / size.width);          
