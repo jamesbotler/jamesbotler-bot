@@ -1,6 +1,6 @@
 {
   "name": "@ralphschuler/jamesbotler",
-  "version": "1.3.0",
+  "version": "1.3.2",
   "description": "",
   "main": "dist/index.js",
   "private": true,
@@ -9,7 +9,7 @@
     "deploy": "docker-compose up --remove-orphans -d --build",
     "lint": "npx eslint src",
     "start": "npx babel-node ./src/index.js",
-    "build": "npx babel src -o dist",
+    "build": "npx babel src --out-dir dist",
     "lint:fix": "npx eslint src --fix"
   },
   "repository": {
