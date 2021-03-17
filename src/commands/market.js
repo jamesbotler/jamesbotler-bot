@@ -3,7 +3,9 @@ import config from '../config'
 import fs from 'fs'
 import csv from 'csvtojson'
 
-export async function run(client, message, ...args) {
+import Logger from '../Libraries/Logger'
+
+export default async function run(client, interaction) { Logger.debug('command:market', { client, integration })
   try {
     const response = await axios.get(`${config.eve_market_api}/market-stats/stats.csv`, { responseType: 'stream' })
     if (fs.existsSync('./cache/eve_echoes_market_data.json')) {
@@ -19,6 +21,35 @@ export async function run(client, message, ...args) {
    
     const reply = await message.inlineReply("dasd");
   } catch (error) {
-    client.logger.error({error});
+    Logger.fatal(error);
   }
 }
+export const description = "Send a random adorable animal photo"
+export const options = [
+  {
+    name: "animal",
+    description: "The type of animal",
+    type: 3,
+    required: True,
+    choices: [
+      {
+        name: "Dog",
+        value: "animal_dog",
+      },
+      {
+        name: "Cat",
+        value: "animal_cat",
+      },
+      {
+        name: "Penguin",
+        value: "animal_penguin",
+      },
+    ],
+  },
+  {
+    name: "only_smol",
+    description: "Whether to show only baby animals",
+    type: 5,
+    required: False,
+  },
+];

@@ -6,6 +6,6 @@ export default function run(str) {
     str = str.replace(/^\*{2,}|\*{2,}$/, ""); // remove stars at end and front cause we are placing
     return str;
   } catch (error) {
-    console.log(error);
+    logger.fatal(error);
   }
 }

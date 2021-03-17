@@ -5,6 +5,8 @@ import gm from "gm";
 import escapeText from "../utilities/escapeText";
 import { MessageAttachment } from "discord.js";
 
+import Logger from '../Libraries/Logger'
+
 export const emojis = ["🔫"];
 export async function run(client, reaction, user) {
   try {
@@ -29,7 +31,7 @@ export async function run(client, reaction, user) {
           cachePath: "./data/tesseract",
           logger: async function (m) {
             if (Math.floor(m.progress * 10) % 10 != 0) return;
-            client.logger.info(m);
+            Logger.info("Tesseract", m);
             const key = m.status.replace(/\(.*\)/, "").split(" ");
             key.shift();
             textFactory[key.join()] = `[${
@@ -43,19 +45,21 @@ export async function run(client, reaction, user) {
             let img = gm(optimizedImage);
             for (const line of data.lines) {
               let { words } = line;
-              words.filter(word => word.confidence >= 50)
-              img = img.stroke("#ff00ff", 5);
+              words = words.filter(word => word.text.length >= 3)
+
+              if (words.length < 1) continue
+              img = img.stroke("#ff00ff", 1);
               img = img.fill("transparent");
               img = img.drawRectangle(
                 words[0].bbox.x0 - 5,
                 words[0].bbox.y0 - 5,
-                words[words.length].bbox.x1 + 5,
-                words[words.length].bbox.y1 + 5
+                words[words.length-1].bbox.x1 + 5,
+                words[words.length-1].bbox.y1 + 5
               );
               textFactory[Object.keys(textFactory).length] = words.map(word => word.text).join(' ');
             }
             img.toBuffer("JPG", (error, buf) => {
-              if (error) client.log.error({ error });
+              if (error) Logger.error("GM", error);
               message.inlineReply(new MessageAttachment(buf, name));
             });
 
@@ -64,11 +68,11 @@ export async function run(client, reaction, user) {
             );
           })
           .catch((error) => {
-            client.logger.error({ error });
+            Logger.fatal(error);
           });
       }
     }
   } catch (error) {
-    client.logger.error({ error });
+    Logger.fatal(error);
   }
 }

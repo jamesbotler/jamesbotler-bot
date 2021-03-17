@@ -2,7 +2,9 @@ import { MessageAttachment } from "discord.js";
 import axios from 'axios'
 import imageOptimization from '../utilities/imageOptimization'
 
-export async function run(client, message, ...args) {
+import Logger from '../Libraries/Logger'
+
+export default async function run(client, interaction) { Logger.debug('command:optimize', { client, interaction })
   try {
     const attachments = message.attachments.array();
 
@@ -21,6 +23,35 @@ export async function run(client, message, ...args) {
       message.inlineReply(new MessageAttachment(newBuffer, name))
     }
   } catch (error) {
-    client.logger.error({ error });
+    Logger.fatal(error);
   }
 }
+export const description = "Send a random adorable animal photo"
+export const options = [
+  {
+    name: "animal",
+    description: "The type of animal",
+    type: 3,
+    required: True,
+    choices: [
+      {
+        name: "Dog",
+        value: "animal_dog",
+      },
+      {
+        name: "Cat",
+        value: "animal_cat",
+      },
+      {
+        name: "Penguin",
+        value: "animal_penguin",
+      },
+    ],
+  },
+  {
+    name: "only_smol",
+    description: "Whether to show only baby animals",
+    type: 5,
+    required: False,
+  },
+];

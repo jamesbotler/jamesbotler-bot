@@ -15,11 +15,8 @@ services:
       - tor2
       - tor3
       - tor4
-      - tor5
-      - tor6
-      - tor7
-      - tor8
-      - tor9
+      - db
+
   staging:
     build: .
     restart: always
@@ -31,11 +28,22 @@ services:
       - tor2
       - tor3
       - tor4
-      - tor5
-      - tor6
-      - tor7
-      - tor8
-      - tor9
+      - db
+
+  db:
+    image: mongo
+    restart: always
+
+  db-dump:
+    image: tutum/mongodb-backup
+    restart: always
+    environment:
+      MONGODB_HOST: 'db'
+      MONGODB_PORT: 27017
+      INIT_BACKUP: 'true'
+    links:
+      - db
+
   tor0:
     image: dperson/torproxy
     restart: always
@@ -61,28 +69,3 @@ services:
     restart: always
     environment:
       - LOCATION=HK
-  tor5:
-    image: dperson/torproxy
-    restart: always
-    environment:
-      - LOCATION=MX
-  tor6:
-    image: dperson/torproxy
-    restart: always
-    environment:
-      - LOCATION=NL
-  tor7:
-    image: dperson/torproxy
-    restart: always
-    environment:
-      - LOCATION=RU
-  tor8:
-    image: dperson/torproxy
-    restart: always
-    environment:
-      - LOCATION=ES
-  tor9:
-    image: dperson/torproxy
-    restart: always
-    environment:
-      - LOCATION=CH

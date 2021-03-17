@@ -6,10 +6,11 @@ export default function run(buffer) {
       gm(buffer)
         .antialias(false)
         .negative()
-        .threshold(80, true)
+        .contrast(-25)
+        .threshold(55, true)
         .size(function (error, size) {
           if (error) reject(error);
-          const factor = Math.min(1, 1920.0 / size.width);          
+          const factor = Math.min(1, 1024.0 / size.width);
           this.resize(size.width * factor, size.height * factor);
           
           this.toBuffer("JPG", (error, newBuffer) => {

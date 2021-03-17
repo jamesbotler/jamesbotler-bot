@@ -1,7 +1,9 @@
 import { APIMessage, Structures } from "discord.js";
 
-class Message extends Structures.get("Message") {
-  async inlineReply(content, options) {
+import Logger from '../Libraries/Logger'
+
+export default class extends Structures.get("Message") {
+  async inlineReply(content, options) { Logger.debug('extenstion:message:inlineReply', { content, options })
     const mentionRepliedUser =
       typeof ((options || content || {}).allowedMentions || {}).repliedUser ===
       "undefined"
@@ -48,7 +50,7 @@ class Message extends Structures.get("Message") {
       .then((x) => this.client.actions.MessageCreate.handle(x).message);
   }
 
-  async pagedReply(pages, startIndex = 0, options) {
+  async pagedReply(pages, startIndex = 0, options) { Logger.debug('extenstion:message:pagedReply', { pages, startIndex = 0, options })
     let index = startIndex;
     let text = pageToString(pages[index]);
 
@@ -89,5 +91,3 @@ class Message extends Structures.get("Message") {
     message.delete();
   }
 }
-
-Structures.extend("Message", () => Message);
