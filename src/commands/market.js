@@ -5,7 +5,7 @@ import csv from 'csvtojson'
 
 import Logger from '../Libraries/Logger'
 
-export default async function run(client, interaction) { Logger.debug('command:market', { client, integration })
+export const run = async (client, interaction) => { Logger.debug('command:market', { integration })
   try {
     const response = await axios.get(`${config.eve_market_api}/market-stats/stats.csv`, { responseType: 'stream' })
     if (fs.existsSync('./cache/eve_echoes_market_data.json')) {
@@ -30,7 +30,7 @@ export const options = [
     name: "animal",
     description: "The type of animal",
     type: 3,
-    required: True,
+    required: true,
     choices: [
       {
         name: "Dog",
@@ -50,6 +50,6 @@ export const options = [
     name: "only_smol",
     description: "Whether to show only baby animals",
     type: 5,
-    required: False,
+    required: false,
   },
 ];

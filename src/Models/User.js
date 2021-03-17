@@ -1,4 +1,4 @@
-import { model. Schema } from 'mongoose'
+import { model, Schema } from 'mongoose'
 
 const GuildSchema = new Schema({    
     id: {
@@ -6,4 +6,4 @@ const GuildSchema = new Schema({
     }
 })
 
-export default model('Guild', GuildSchema)
+export default model('User', GuildSchema)

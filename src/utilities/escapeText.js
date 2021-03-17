@@ -1,4 +1,4 @@
-export default function run(str) {
+export default (str) => {
   try {
     str = str.replace(/[\n\r|\n\n]{2,}/g, "\n"); // clear carriage return
     str = str.replace(/\s{2,}/g, " "); // replace multiple spaces by a single one

@@ -1,6 +1,6 @@
 import gm from "gm";
 
-export default function run(buffer) {
+export default (buffer) => {
   return new Promise((resolve, reject) => {
     try {
       gm(buffer)

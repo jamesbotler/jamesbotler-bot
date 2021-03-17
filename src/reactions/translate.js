@@ -1,11 +1,11 @@
 import flagMap from "../data/flagMap";
-import translate from "../modules/translate";
-import escapeText from "../utilities/escapeText";
+import translate from "../Modules/translate";
+import escapeText from "../Utilities/escapeText";
 
 import Logger from '../Libraries/Logger'
 
 export const emojis = flagMap.map((flag) => flag.flag_emoji);
-export async function run(client, reaction, user) { Logger.debug('reaction:translate', { client, reaction, user })
+export const run = async (client, reaction, user) => { Logger.debug('reaction:translate', { reaction, user })
   try {
     if (reaction.message.cleanContent === "") return;
     const flag = flagMap.find(

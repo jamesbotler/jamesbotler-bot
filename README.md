@@ -6,6 +6,10 @@
 
 Goal of this project is to create a discord bot free personal discord bot.
 
+[Invite slash Integration](https://discord.com/oauth2/authorize?client_id=814435537888346112&scope=applications.commands&permissions=2147483647)
+
+[Invite Bot Integration](https://discord.com/oauth2/authorize?client_id=814435537888346112&scope=bot&permissions=2147483647)
+
 ### Environment Variables
 
 ```.env

@@ -1,14 +1,14 @@
 import Tesseract from "tesseract.js";
-import imageOptimization from "../utilities/imageOptimization";
+import imageOptimization from "../Utilities/imageOptimization";
 import axios from "axios";
 import gm from "gm";
-import escapeText from "../utilities/escapeText";
+import escapeText from "../Utilities/escapeText";
 import { MessageAttachment } from "discord.js";
 
 import Logger from '../Libraries/Logger'
 
 export const emojis = ["🔫"];
-export async function run(client, reaction, user) {
+export const run = async (client, reaction, user) => {
   try {
     if (!reaction.message.attachments.array().length) return;
 

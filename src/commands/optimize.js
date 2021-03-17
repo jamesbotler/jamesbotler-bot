@@ -1,10 +1,10 @@
 import { MessageAttachment } from "discord.js";
 import axios from 'axios'
-import imageOptimization from '../utilities/imageOptimization'
+import imageOptimization from '../Utilities/imageOptimization'
 
 import Logger from '../Libraries/Logger'
 
-export default async function run(client, interaction) { Logger.debug('command:optimize', { client, interaction })
+export const run = async (client, interaction) => { Logger.debug('command:optimize', { interaction })
   try {
     const attachments = message.attachments.array();
 
@@ -32,7 +32,7 @@ export const options = [
     name: "animal",
     description: "The type of animal",
     type: 3,
-    required: True,
+    required: true,
     choices: [
       {
         name: "Dog",
@@ -52,6 +52,6 @@ export const options = [
     name: "only_smol",
     description: "Whether to show only baby animals",
     type: 5,
-    required: False,
+    required: false,
   },
 ];

@@ -1,4 +1,4 @@
-export default function run(str) {
+export default (str) => {
   const args = [];
   let readingPart = false;
   let part = "";

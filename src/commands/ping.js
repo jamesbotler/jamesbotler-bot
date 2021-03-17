@@ -1,6 +1,6 @@
 import Logger from '../Libraries/Logger'
 
-export default async function run(client, interaction) { Logger.debug('command:ping', { client, interaction })
+export const run = async (client, interaction) => { Logger.debug('command:ping', { interaction })
   try {
     message.inlineReply("Pong!");
   } catch (error) {
@@ -13,7 +13,7 @@ export const options = [
     name: "animal",
     description: "The type of animal",
     type: 3,
-    required: True,
+    required: true,
     choices: [
       {
         name: "Dog",
@@ -33,6 +33,6 @@ export const options = [
     name: "only_smol",
     description: "Whether to show only baby animals",
     type: 5,
-    required: False,
+    required: false,
   },
 ];

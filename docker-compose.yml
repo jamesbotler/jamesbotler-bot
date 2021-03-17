@@ -32,15 +32,17 @@ services:
 
   db:
     image: mongo
+    volumes:
+      - ./data/mongodb:/data/db
     restart: always
 
   db-dump:
-    image: tutum/mongodb-backup
+    image: tiredofit/mongodb-backup
     restart: always
+    volumes:
+      - ./data/mongodump:/backup
     environment:
-      MONGODB_HOST: 'db'
-      MONGODB_PORT: 27017
-      INIT_BACKUP: 'true'
+      - DB_HOST=db
     links:
       - db
 
