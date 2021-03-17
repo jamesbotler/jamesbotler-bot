@@ -2,23 +2,21 @@ version: '3.8'
 
 services:
   production:
-    image: ghcr.io/ralphschuler/jamesbotler:1.2.4
+    image: ghcr.io/ralphschuler/jamesbotler:1.2.5
     restart: always
     env_file:
       - .prod.env
     volumes:
       - ./cache:/usr/src/app/cache
+      - ./data:/usr/src/app/data
     links:
       - tor0
       - tor1
       - tor2
       - tor3
       - tor4
-      - tor5
-      - tor6
-      - tor7
-      - tor8
-      - tor9
+      - db
+
   staging:
     build: .
     restart: always
@@ -30,11 +28,24 @@ services:
       - tor2
       - tor3
       - tor4
-      - tor5
-      - tor6
-      - tor7
-      - tor8
-      - tor9
+      - db
+
+  db:
+    image: mongo
+    volumes:
+      - ./data/mongodb:/data/db
+    restart: always
+
+  db-dump:
+    image: tiredofit/mongodb-backup
+    restart: always
+    volumes:
+      - ./data/mongodump:/backup
+    environment:
+      - DB_HOST=db
+    links:
+      - db
+
   tor0:
     image: dperson/torproxy
     restart: always
@@ -60,28 +71,3 @@ services:
     restart: always
     environment:
       - LOCATION=HK
-  tor5:
-    image: dperson/torproxy
-    restart: always
-    environment:
-      - LOCATION=MX
-  tor6:
-    image: dperson/torproxy
-    restart: always
-    environment:
-      - LOCATION=NL
-  tor7:
-    image: dperson/torproxy
-    restart: always
-    environment:
-      - LOCATION=RU
-  tor8:
-    image: dperson/torproxy
-    restart: always
-    environment:
-      - LOCATION=ES
-  tor9:
-    image: dperson/torproxy
-    restart: always
-    environment:
-      - LOCATION=CH

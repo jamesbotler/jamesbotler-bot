@@ -1,5 +1,5 @@
 import franc from 'franc'
 
-export default function run(str) {
+export default (str) => {
     return franc(str)
 }

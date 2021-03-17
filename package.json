@@ -1,14 +1,15 @@
 {
   "name": "@ralphschuler/jamesbotler",
-  "version": "1.2.5",
+  "version": "1.3.0",
   "description": "",
-  "main": "dist/main.js",
+  "main": "dist/index.js",
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "deploy": "docker-compose up --remove-orphans -d --build",
     "lint": "npx eslint src",
-    "start": "npx babel-node ./src/main.js",
+    "start": "npx babel-node ./src/index.js",
+    "build": "npx babel src -o dist",
     "lint:fix": "npx eslint src --fix"
   },
   "repository": {
@@ -22,11 +23,17 @@
   },
   "homepage": "https://github.com/ralphschuler/jamesbotler#readme",
   "dependencies": {
+    "@sentry/node": "^6.2.2",
+    "@sentry/tracing": "^6.2.2",
     "axios": "^0.21.1",
-    "discord.js": "^12.5.1",
+    "csvtojson": "^2.0.10",
+    "discord-slash-commands-client": "^1.1.1",
+    "discord.js": "github:ralphschuler/discord.js",
     "dotenv": "^8.2.0",
     "franc": "^5.0.0",
     "gm": "^1.23.1",
+    "kurasuta": "^2.2.3",
+    "mongoose": "^5.12.0",
     "node-wit": "^6.0.1",
     "nodemon": "^2.0.7",
     "socks-proxy-agent": "^5.0.0",

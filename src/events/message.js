@@ -1,7 +1,9 @@
 import config from "../config";
-import commandParser from "../utilities/commandParser";
+import commandParser from "../Utilities/commandParser";
 
-export async function run(client, message) {
+import Logger from '../Libraries/Logger'
+
+export const run = async (client, message) => { Logger.debug('event:message', { message })
   try {
     if (message.author.bot || message.author === client.user) return;
 
@@ -11,7 +13,6 @@ export async function run(client, message) {
       client.emit(`command.${command}`, message, args);
     } 
   } catch (error) {
-    console.log(error)
-    client.logger.error({error});
+    Logger.fatal(error);
   }
 }
