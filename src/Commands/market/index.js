@@ -1,11 +1,11 @@
 import axios from 'axios'
-import config from '../config'
+import config from '../../config'
 import fs from 'fs'
 import csv from 'csvtojson'
 
-import Logger from '../Libraries/Logger'
+import Logger from '../../Libraries/Logger'
 
-export const run = async (client, interaction) => { Logger.debug('command:market', { integration })
+export const run = async (client, interaction) => { Logger.debug('command:market', { pid: process.pid, integration })
   try {
     const response = await axios.get(`${config.eve_market_api}/market-stats/stats.csv`, { responseType: 'stream' })
     if (fs.existsSync('./cache/eve_echoes_market_data.json')) {
@@ -21,7 +21,7 @@ export const run = async (client, interaction) => { Logger.debug('command:market
    
     const reply = await message.inlineReply("dasd");
   } catch (error) {
-    Logger.fatal(error);
+    Logger.fatal(Object.assign(error, { pid: process.pid }));
   }
 }
 export const description = "Send a random adorable animal photo"

@@ -1,11 +1,11 @@
-import flagMap from "../data/flagMap";
-import translate from "../Modules/translate";
-import escapeText from "../Utilities/escapeText";
+import flagMap from "../../data/flagMap";
+import translate from "../../Modules/translate";
+import escapeText from "../../Utilities/escapeText";
 
-import Logger from '../Libraries/Logger'
+import Logger from '../../Libraries/Logger'
 
 export const emojis = flagMap.map((flag) => flag.flag_emoji);
-export const run = async (client, reaction, user) => { Logger.debug('reaction:translate', { reaction, user })
+export const run = async (client, reaction, user) => { Logger.debug('reaction:translate', { pid: process.pid, reaction, user })
   try {
     if (reaction.message.cleanContent === "") return;
     const flag = flagMap.find(
@@ -19,6 +19,6 @@ export const run = async (client, reaction, user) => { Logger.debug('reaction:tr
       }
     );
   } catch (error) {
-    Logger.fatal(error);
+    Logger.fatal(Object.assign(error, { pid: process.pid }));
   }
 }

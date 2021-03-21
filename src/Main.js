@@ -5,6 +5,6 @@ export default class extends BaseCluster {
   launch() {
     try {
       this.client.login(process.env.DISCORD_TOKEN)
-    } catch (error) { Logger.fatal(error) }
+    } catch (error) { Logger.fatal(Object.assign(error, { pid: process.pid })) }
   }
 }

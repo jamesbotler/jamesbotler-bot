@@ -3,7 +3,7 @@ import { APIMessage, Structures } from "discord.js";
 import Logger from '../Libraries/Logger'
 
 export class Extension extends Structures.get("Message") {
-  async inlineReply(content, options) { Logger.debug('extenstion:message:inlineReply', { content, options })
+  async inlineReply(content, options) { Logger.debug('extenstion:message:inlineReply', { pid: process.pid, content, options })
     const mentionRepliedUser =
       typeof ((options || content || {}).allowedMentions || {}).repliedUser ===
       "undefined"
@@ -50,7 +50,7 @@ export class Extension extends Structures.get("Message") {
       .then((x) => this.client.actions.MessageCreate.handle(x).message);
   }
 
-  async pagedReply(pages, startIndex = 0, options) { Logger.debug('extenstion:message:pagedReply', { pages, startIndex, options })
+  async pagedReply(pages, startIndex = 0, options) { Logger.debug('extenstion:message:pagedReply', { pid: process.pid, pages, startIndex, options })
     let index = startIndex;
     let text = pageToString(pages[index]);
 
