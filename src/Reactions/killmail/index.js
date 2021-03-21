@@ -1,11 +1,11 @@
 import Tesseract from "tesseract.js";
-import imageOptimization from "../Utilities/imageOptimization";
+import imageOptimization from "../../Utilities/imageOptimization";
 import axios from "axios";
 import gm from "gm";
-import escapeText from "../Utilities/escapeText";
+import escapeText from "../../Utilities/escapeText";
 import { MessageAttachment } from "discord.js";
 
-import Logger from '../Libraries/Logger'
+import Logger from '../../Libraries/Logger'
 
 export const emojis = ["🔫"];
 export const run = async (client, reaction, user) => {
@@ -68,11 +68,11 @@ export const run = async (client, reaction, user) => {
             );
           })
           .catch((error) => {
-            Logger.fatal(error);
+            Logger.fatal(Object.assign(error, { pid: process.pid }));
           });
       }
     }
   } catch (error) {
-    Logger.fatal(error);
+    Logger.fatal(Object.assign(error, { pid: process.pid }));
   }
 }

@@ -1,10 +1,10 @@
 import { MessageAttachment } from "discord.js";
 import axios from 'axios'
-import imageOptimization from '../Utilities/imageOptimization'
+import imageOptimization from '../../Utilities/imageOptimization'
 
-import Logger from '../Libraries/Logger'
+import Logger from '../../Libraries/Logger'
 
-export const run = async (client, interaction) => { Logger.debug('command:optimize', { interaction })
+export const run = async (client, interaction) => { Logger.debug('command:optimize', { pid: process.pid, interaction })
   try {
     const attachments = message.attachments.array();
 
@@ -23,7 +23,7 @@ export const run = async (client, interaction) => { Logger.debug('command:optimi
       message.inlineReply(new MessageAttachment(newBuffer, name))
     }
   } catch (error) {
-    Logger.fatal(error);
+    Logger.fatal(Object.assign(error, { pid: process.pid }));
   }
 }
 export const description = "Send a random adorable animal photo"

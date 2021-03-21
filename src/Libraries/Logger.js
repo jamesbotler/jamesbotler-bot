@@ -1,5 +1,6 @@
 import * as Sentry from '@sentry/node'
 import { inspect } from 'util'
+import 'colors'
 
 Sentry.init({
     tracesSampleRate: 1.0,
@@ -27,7 +28,7 @@ export default class Logger {
             message,
             level: Sentry.Severity.Debug
         })
-        if (LogLevel <= Level.DEBUG) console.log(str("[debug]", `[${category}]`, ` ${inspect(message, true, 5)}`))
+        if (LogLevel <= Level.DEBUG) console.log(str("[debug]".gray, `[${category}]`.gray, ` ${inspect(message, true, 5)}`.gray))
     }
 
     static info(category, message) {
@@ -36,7 +37,7 @@ export default class Logger {
             message,
             level: Sentry.Severity.Info
         })
-        if (LogLevel <= Level.INFO) console.log(str("[info]", `[${category}]`, ` ${inspect(message, true, 5)}`))
+        if (LogLevel <= Level.INFO) console.log(str("[info]".white, `[${category}]`.white, ` ${inspect(message, true, 5)}`.white))
     }
 
     static warn(category, message) {
@@ -45,7 +46,7 @@ export default class Logger {
             message,
             level: Sentry.Severity.Warning
         })
-        if (LogLevel <= Level.WARN) console.log(str("[warn]", `[${category}]`, ` ${inspect(message, true, 5)}`))
+        if (LogLevel <= Level.WARN) console.log(str("[warn]".yellow, `[${category}]`.yellow, ` ${inspect(message, true, 5)}`.white))
     }
 
     static error(category, message) {
@@ -54,11 +55,11 @@ export default class Logger {
             message,
             level: Sentry.Severity.Error
         })
-        if (LogLevel <= Level.ERROR) console.log(str("[error]", `[${category}]`, ` ${inspect(message, true, 5)}`))
+        if (LogLevel <= Level.ERROR) console.log(str("[error]".red, `[${category}]`.red, ` ${inspect(message, true, 5)}`.white))
     }
 
     static fatal(error) {
         Sentry.captureException(error)
-        console.log(str("[fatal]", ` ${inspect(error, true, 5)}`))
+        console.log(str("[fatal]".red, ` ${inspect(error, true, 5)}`.red))
     }
 }
