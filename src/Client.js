@@ -76,7 +76,7 @@ export default class extends Client {
     try {
       const directories = Fs.readdirSync(path);
       for (const directory of directories) {
-        if (!Fs.existsSync(Path.join(path, directory, "index"))) continue;
+        if (!Fs.existsSync(Path.join(path, directory))) continue;
         let { emojis, run } = require(Path.join(path, directory, "index"));
 
         Logger.info("client:loadReactions", { emojis });
