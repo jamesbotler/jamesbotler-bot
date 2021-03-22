@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   production:
-    image: ghcr.io/ralphschuler/jamesbotler:1.3.5
+    image: ghcr.io/ralphschuler/jamesbotler:1.3.4
     restart: always
     env_file:
       - .prod.env
