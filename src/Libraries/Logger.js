@@ -1,9 +1,13 @@
 import * as Sentry from '@sentry/node'
+import * as Tracing from '@sentry/tracing'
 import { inspect } from 'util'
 import 'colors'
 
 Sentry.init({
     tracesSampleRate: 1.0,
+    integrations: [
+        new Tracing.Integrations.Mongo()
+    ],
     dsn: process.env.SENTRY_DSN,
 })
 
@@ -25,7 +29,7 @@ export default class Logger {
     static debug(category, message) {
         Sentry.addBreadcrumb({
             category,
-            message,
+            message: JSON.stringify(message),
             level: Sentry.Severity.Debug
         })
         if (LogLevel <= Level.DEBUG) console.log(str("[debug]".gray, `[${category}]`.gray, ` ${inspect(message, true, 5)}`.gray))
@@ -34,7 +38,7 @@ export default class Logger {
     static info(category, message) {
         Sentry.addBreadcrumb({
             category,
-            message,
+            message: JSON.stringify(message),
             level: Sentry.Severity.Info
         })
         if (LogLevel <= Level.INFO) console.log(str("[info]".white, `[${category}]`.white, ` ${inspect(message, true, 5)}`.white))
@@ -43,7 +47,7 @@ export default class Logger {
     static warn(category, message) {
         Sentry.addBreadcrumb({
             category,
-            message,
+            message: JSON.stringify(message),
             level: Sentry.Severity.Warning
         })
         if (LogLevel <= Level.WARN) console.log(str("[warn]".yellow, `[${category}]`.yellow, ` ${inspect(message, true, 5)}`.white))
@@ -52,7 +56,7 @@ export default class Logger {
     static error(category, message) {
         Sentry.addBreadcrumb({
             category,
-            message,
+            message: JSON.stringify(message),
             level: Sentry.Severity.Error
         })
         if (LogLevel <= Level.ERROR) console.log(str("[error]".red, `[${category}]`.red, ` ${inspect(message, true, 5)}`.white))
