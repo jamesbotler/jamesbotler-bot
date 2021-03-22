@@ -13,7 +13,8 @@ const shardingManager = new ShardingManager(Path.join(__dirname, 'Main'), {
         partials: ["USER", "GUILD_MEMBER", "MESSAGE", "CHANNEL", "REACTION"],
         intents: new Intents(Intents.All),
         publicKey: process.env.DISCORD_PUBLICKEY,
-        clientId: process.env.DISCORD_CLIENTID
+        clientID: process.env.DISCORD_CLIENTID,        
+        token: process.env.DISCORD_TOKEN
     },
     development: !isProduction,
     respawn: isProduction,
