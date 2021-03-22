@@ -97,7 +97,7 @@ export default class extends Client {
       throw new Error(`${path} doesn't exist or isn't a directory!`);
 
     try {      
-      const command = [] // await this.interactionClient.fetchCommands();
+      const commands = [] // await this.interactionClient.fetchCommands();
       const directories = Fs.readdirSync(path);
       for (const directory of directories) {
         if (!Fs.existsSync(Path.join(path, directory, "index.js"))) continue;
