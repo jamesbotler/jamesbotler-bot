@@ -50,23 +50,24 @@ export default async function run(str, lang) {
 
 async function translate(str, lang) {
   const response = await tunnelFetch({
-    method: "POST",
-    url: config.translation_api,
+    method: "GET",
+    url: 'https://translate.google.com/translate_a/single',
     data: { q: str },
     params: {
-      source: "auto",
-      target: lang,
+      client: 'gtx',
+      sl: 'auto',
+      tl: lang,
+      dt: 't',
+      q: encodeURIComponent(str)
     },
   });
 
   if (
     !response ||
-    !response.status === 200 ||
-    !response.data ||
-    !response.data.translation
+    !response.status === 200
   ) {
     console.log(response.data, response.statusText);
   }
 
-  return response.data.translation;
+  return response.data;
 }
