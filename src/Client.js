@@ -17,14 +17,14 @@ export default class extends Client {
     try {
       this.on("debug", (...args) => Logger.debug("client", args));
       this.on("warn", (...args) => Logger.warn("client", args));
-      this.on("error", (...args) => Logger.error("client:constructor", args));
+      this.on("error", (...args) => Logger.error("client", args));
 
       this.interactionClient = new InteractionClient(options)
 
       this.loadExtensions(Path.join(__dirname, "Extensions"));
-      this.loadReactions(Path.join(__dirname, "Reactions"));
-      this.loadCommands(Path.join(__dirname, "Commands"));
       this.loadEvents(Path.join(__dirname, "Events"));
+      this.loadCommands(Path.join(__dirname, "Commands"));
+      this.loadReactions(Path.join(__dirname, "Reactions"));
     } catch (error) {
       Logger.fatal(Object.assign(error, { pid: process.pid }));
     }
@@ -76,8 +76,8 @@ export default class extends Client {
     try {
       const directories = Fs.readdirSync(path);
       for (const directory of directories) {
-        if (!Fs.existsSync(Path.join(path, directory))) continue;
-        let { emojis, run } = require(Path.join(path, directory, "index"));
+        if (!Fs.existsSync(Path.join(path, directory, 'index.js'))) continue;
+        let { emojis, run } = require(Path.join(path, directory));
 
         Logger.info("client:loadReactions", { emojis });
         for (const emoji of emojis) {
