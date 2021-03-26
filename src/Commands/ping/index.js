@@ -1,8 +1,8 @@
 import Logger from '../../Libraries/Logger'
 
-export const run = async (client, interaction) => { Logger.info('command:ping', { pid: process.pid, interaction })
+export const run = async (client, message) => { Logger.info('command:ping', { pid: process.pid, message })
   try {
-    interaction.reply("Pong!");
+    message.inlineReply("Pong!");
   } catch (error) {
     logger.fatal(Object.assign(error, { pid: process.pid }));
   }

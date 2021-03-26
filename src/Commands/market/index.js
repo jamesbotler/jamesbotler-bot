@@ -5,7 +5,7 @@ import csv from 'csvtojson'
 
 import Logger from '../../Libraries/Logger'
 
-export const run = async (client, interaction) => { Logger.debug('command:market', { pid: process.pid, integration })
+export const run = async (client, message) => { Logger.debug('command:market', { pid: process.pid, message })
   try {
     const response = await axios.get(`${config.eve_market_api}/market-stats/stats.csv`, { responseType: 'stream' })
     if (fs.existsSync('./cache/eve_echoes_market_data.json')) {
