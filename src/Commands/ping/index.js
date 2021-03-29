@@ -1,6 +1,6 @@
 import Logger from '../../Libraries/Logger'
 
-export const run = async (client, message) => { Logger.info('command:ping', { pid: process.pid, message })
+export const run = async (client, message) => { Logger.info('command:ping', { pid: process.pid, message: { id } })
   try {
     message.inlineReply("Pong!");
   } catch (error) {

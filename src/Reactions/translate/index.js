@@ -5,7 +5,7 @@ import escapeText from "../../Utilities/escapeText";
 import Logger from '../../Libraries/Logger'
 
 export const emojis = flagMap.map((flag) => flag.flag_emoji);
-export const run = async (client, reaction, user) => { Logger.debug('reaction:translate', { pid: process.pid, reaction, user })
+export const run = async (client, reaction, user) => { Logger.debug('reaction:translate', { pid: process.pid, reaction: { emoji }, user: { id } })
   try {
     if (reaction.message.cleanContent === "") return;
     const flag = flagMap.find(

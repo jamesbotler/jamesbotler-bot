@@ -3,7 +3,7 @@ import commandParser from "../Utilities/commandParser";
 
 import Logger from '../Libraries/Logger'
 
-export const run = async (client, message) => { Logger.debug('event:message', { pid: process.pid, message })
+export const run = async (client, message) => { Logger.debug('event:message', { pid: process.pid, message: { id } })
   try {
     if (message.author.bot || message.author === client.user) return;
     

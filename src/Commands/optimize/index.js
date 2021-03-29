@@ -4,7 +4,7 @@ import imageOptimization from '../../Utilities/imageOptimization'
 
 import Logger from '../../Libraries/Logger'
 
-export const run = async (client, message) => { Logger.debug('command:optimize', { pid: process.pid, message })
+export const run = async (client, message) => { Logger.debug('command:optimize', { pid: process.pid, message: { id } })
   try {
     const attachments = message.attachments.array();
 

@@ -4,7 +4,7 @@ import Guild from '../Models/Guild'
 import Logger from '../Libraries/Logger'
 
 export class Extension extends Structures.get("Guild") {
-    constructor(client, data) { Logger.debug('extenstion:guild:constructor', { pid: process.pid, data })
+    constructor(client, data) { Logger.debug('extenstion:guild:constructor', { pid: process.pid })
         super(client, data)
         
         this.load()
