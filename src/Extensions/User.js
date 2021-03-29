@@ -4,7 +4,7 @@ import User from '../Models/User'
 import Logger from '../Libraries/Logger'
 
 export class Extension extends Structures.get("User") {
-    constructor(client, data) { Logger.debug('extenstion:user:constructor', { pid: process.pid, data })
+    constructor(client, data) { Logger.debug('extenstion:user:constructor', { pid: process.pid })
         super(client, data)
 
         this.load()

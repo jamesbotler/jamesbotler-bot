@@ -52,7 +52,6 @@ async function translate(str, lang) {
   const response = await tunnelFetch({
     method: "GET",
     url: 'https://translate.google.com/translate_a/single',
-    data: { q: str },
     params: {
       client: 'gtx',
       sl: 'auto',
@@ -66,7 +65,7 @@ async function translate(str, lang) {
     !response ||
     !response.status === 200
   ) {
-    console.log(response.data, response.statusText);
+    console.log(response.statusText);
   }
 
   return response.data;

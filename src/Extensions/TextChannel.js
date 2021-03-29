@@ -4,7 +4,7 @@ import TextChannel from '../Models/TextChannel'
 import Logger from '../Libraries/Logger'
 
 export class Extension extends Structures.get("TextChannel") {
-    constructor(client, data) { Logger.debug('extenstion:textChannel:constructor', { pid: process.pid, data })
+    constructor(client, data) { Logger.debug('extenstion:textChannel:constructor', { pid: process.pid })
         super(client, data)
 
         this.load()

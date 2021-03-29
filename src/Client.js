@@ -1,8 +1,6 @@
 import {
   Client,
   Structures,
-  ApplicationCommand,
-  InteractionClient,
 } from "discord.js";
 import Path from "path";
 import Fs from "fs";
@@ -18,8 +16,6 @@ export default class extends Client {
       this.on("debug", (...args) => Logger.debug("client", args));
       this.on("warn", (...args) => Logger.warn("client", args));
       this.on("error", (...args) => Logger.error("client", args));
-
-      this.interactionClient = new InteractionClient(options)
 
       this.loadExtensions(Path.join(__dirname, "Extensions"));
       this.loadEvents(Path.join(__dirname, "Events"));
@@ -96,41 +92,15 @@ export default class extends Client {
     if (!Fs.existsSync(path) || !Fs.statSync(path).isDirectory)
       throw new Error(`${path} doesn't exist or isn't a directory!`);
 
-    try {      
-      const commands = [] // await this.interactionClient.fetchCommands();
+    try {
       const directories = Fs.readdirSync(path);
       for (const directory of directories) {
         if (!Fs.existsSync(Path.join(path, directory, "index.js"))) continue;
         let name = directory;
-        let registerdCommand = commands.find(
-          (command) => command.name === name
-        );
         let { run, description, options } = require(Path.join(path, directory));
-        if (!registerdCommand) {
-          /* await this.interactionClient.createCommand(
-            new ApplicationCommand(this.interactionClient, {
-              name,
-              description,
-              options,
-            })
-          ); */
-        } else {
-          if (
-            registerdCommand.description != description ||
-            registerdCommand.options != options
-          ) {
-            // await registerdCommand.edit({ name, description, options });
-          }
-        }
-
-        Logger.info("client:loadCommands", { name });
+        
+        Logger.info("client:loadCommands", { name, description });
         this.on(`command.${name}`, (...args) => run(this, ...args));
-      }
-
-      for (const command of commands) {
-        if (directories.indexOf(command.name) === -1) {
-          // await command.delete();
-        }
       }
     } catch (error) {
       Logger.fatal(Object.assign(error, { pid: process.pid }));

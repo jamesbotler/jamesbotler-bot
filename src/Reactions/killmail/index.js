@@ -8,7 +8,7 @@ import { MessageAttachment } from "discord.js";
 import Logger from '../../Libraries/Logger'
 
 export const emojis = ["🔫"];
-export const run = async (client, reaction, user) => {
+export const run = async (client, reaction, user) => { Logger.debug('reaction:killmail', { pid: process.pid, reaction: { emoji }, user: { id } })
   try {
     if (!reaction.message.attachments.array().length) return;
 

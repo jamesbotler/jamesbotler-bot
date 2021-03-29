@@ -7,7 +7,7 @@ import Client from './Client'
 import Logger from './Libraries/Logger'
 
 const isProduction = process.env.NODE_ENV === 'production'
-const shardingManager = new ShardingManager(Path.join(__dirname, 'Main'), {
+const shardingManager = new ShardingManager(Path.join(__dirname, 'main'), {
     client: Client,
     clientOptions: {
         partials: ["USER", "GUILD_MEMBER", "MESSAGE", "CHANNEL", "REACTION"],
