@@ -27,7 +27,7 @@
     "@sentry/tracing": "^6.2.2",
     "axios": "^0.21.1",
     "colors": "^1.4.0",
-    "discord.js": "^12.5.1",
+    "discord.js": "^12.5.3",
     "dotenv": "^8.2.0",
     "franc": "^5.0.0",
     "gm": "^1.23.1",
